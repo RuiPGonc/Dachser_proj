@@ -1,0 +1,28 @@
+<div class="app-shell">
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-main">DACHSER</span>
+      <span class="logo-sub">Intelligent Logistics</span>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <nav class="app-sidebar">
+      <div class="nav-item">
+        <mat-icon>directions_boat</mat-icon>
+        <span>{{ pageTitle }}</span>
+      </div>
+
+      @if (showBackButton) {
+      <button class="back-button" mat-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back</span>
+      </button>
+      }
+    </nav>
+
+    <main class="app-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

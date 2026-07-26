@@ -1,0 +1,50 @@
+.shipment-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 1rem;
+
+  span { font-weight: 400; }
+}
+
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.group-box {
+  border: 1px solid #9e9e9e;
+  border-radius: 4px;
+  padding: 16px 16px 4px;
+  margin: 0;
+  min-width: 220px;
+  flex: 1 1 220px;
+
+  legend {
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0 6px;
+    width: auto;
+  }
+}
+
+.calculate-btn {
+  align-self: center;
+  background-color: #005ea8;
+  color: #fff;
+  height: 40px;
+  margin-top: 8px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

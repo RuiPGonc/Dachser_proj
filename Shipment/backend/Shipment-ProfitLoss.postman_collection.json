@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "Shipment Profit/Loss Calculation API",
+    "description": "Requests for the Calculate Profit use case exposed by the Shipment service (org.dachser.shipment.web.ProfitCalculationController).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "shipmentReference",
+      "value": "0001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Calculate Profit/Loss",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shipmentReference\": \"{{shipmentReference}}\",\n  \"incomeValue\": 1000,\n  \"costs\": {\n    \"costValue\": 200,\n    \"additionalCostValue\": 0\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/profitLoss/calculation",
+          "host": ["{{baseUrl}}"],
+          "path": ["profitLoss", "calculation"]
+        },
+        "description": "Submits income and cost data for a shipment and returns the calculated profit or loss (201 Created)."
+      },
+      "response": []
+    },
+    {
+      "name": "Calculate Profit/Loss - Invalid (all zero)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shipmentReference\": \"{{shipmentReference}}\",\n  \"incomeValue\": 0,\n  \"costs\": {\n    \"costValue\": 0,\n    \"additionalCostValue\": 0\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/profitLoss/calculation",
+          "host": ["{{baseUrl}}"],
+          "path": ["profitLoss", "calculation"]
+        },
+        "description": "Demonstrates the business validation error (400) when income, cost and additional cost are all zero."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Profit/Loss by Shipment Reference",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/profitLoss?shipmentReference={{shipmentReference}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["profitLoss"],
+          "query": [
+            {
+              "key": "shipmentReference",
+              "value": "{{shipmentReference}}"
+            }
+          ]
+        },
+        "description": "Lists every profit/loss calculation previously stored for the given shipment reference (200 OK)."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Profit/Loss by Shipment Reference - Not Found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/profitLoss?shipmentReference=doesnotexist",
+          "host": ["{{baseUrl}}"],
+          "path": ["profitLoss"],
+          "query": [
+            {
+              "key": "shipmentReference",
+              "value": "doesnotexist"
+            }
+          ]
+        },
+        "description": "Demonstrates the 404 error when the shipment reference does not exist."
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Shipment References",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/profitLoss/references",
+          "host": ["{{baseUrl}}"],
+          "path": ["profitLoss", "references"]
+        },
+        "description": "Returns the business reference of every shipment recorded in the system (200 OK)."
+      },
+      "response": []
+    }
+  ]
+}

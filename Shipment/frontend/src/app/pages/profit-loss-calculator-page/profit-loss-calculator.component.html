@@ -1,0 +1,38 @@
+<div class="container py-4">
+  <div class="shipment-header mb-3">
+    <strong>Shipment ID</strong>
+    <span>{{ shipmentReference }}</span>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onCalculate()">
+    <div class="form-row">
+
+      <fieldset class="group-box">
+        <legend>Income &amp; Outcome</legend>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Income</mat-label>
+          <input matInput type="number" formControlName="incomeValue"/>
+        </mat-form-field>
+
+
+        <fieldset class="group-box">
+          <legend>Costs</legend>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Cost</mat-label>
+            <input matInput type="number" formControlName="costValue"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Additional Cost</mat-label>
+            <input matInput type="number" formControlName="additionalCostValue"/>
+          </mat-form-field>
+        </fieldset>
+
+        <button mat-raised-button type="submit" class="calculate-btn">Calculate</button>
+
+      </fieldset>
+
+    </div>
+  </form>
+
+  <app-profit-loss-results [data]="results" [shipmentReference]="shipmentReference"/>
+</div>

@@ -1,0 +1,16 @@
+<div class="container py-5">
+  <h2 class="mb-4">Select Shipment</h2>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Shipment ID</mat-label>
+    <mat-select [(ngModel)]="selected">
+      <mat-option *ngFor="let id of shipmentReferences" [value]="id">
+        {{ id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="!selected" (click)="goToCalculate()">
+    Calculate Profit
+  </button>
+</div>

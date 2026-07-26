@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.dachser.shipment"},{"l":"org.dachser.shipment.dto"},{"l":"org.dachser.shipment.entities"},{"l":"org.dachser.shipment.exception"},{"l":"org.dachser.shipment.mapper"},{"l":"org.dachser.shipment.repository"},{"l":"org.dachser.shipment.service"},{"l":"org.dachser.shipment.web"}];updateSearchResults();

@@ -1,0 +1,8 @@
+org.dachser.shipment
+org.dachser.shipment.dto
+org.dachser.shipment.entities
+org.dachser.shipment.exception
+org.dachser.shipment.mapper
+org.dachser.shipment.repository
+org.dachser.shipment.service
+org.dachser.shipment.web
