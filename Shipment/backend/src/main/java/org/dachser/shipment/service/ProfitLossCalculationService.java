@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,11 +45,12 @@ public class ProfitLossCalculationService {
     }
 
     /**
-     * Retrieves every profit/loss calculation previously stored for a shipment.
+     * Retrieves every profit/loss calculation previously stored for a shipment,
+     * most recent first.
      *
      * @param shipmentReference the business reference of the shipment
-     * @return the calculations recorded for that shipment, as DTOs or
-     * an empty list and interrupt the flow, is profitLossList is empty
+     * @return the calculations recorded for that shipment, as DTOs, ordered by
+     * insertion date descending (an empty list if none were found)
      * @throws org.dachser.shipment.exception.ShipmentNotFoundException if no shipment matches the reference
      */
     public List<ProfitLossDto> getShipmentProfitLoss(String shipmentReference) {
@@ -59,21 +59,9 @@ public class ProfitLossCalculationService {
                                                        .orElseThrow(() -> new ShipmentNotFoundException(shipmentReference));
 
         List<ProfitCalculation> profitLossList = profitCalculationRepository.findAllByShipmentOrderByInsertedOnDesc(shipment);
-              if (profitLossList.isEmpty()) {
-                 log.info("Profit and loss list for shipment {} is empty",shipment.getReference());
-               //returns an empty list
-                  return profitLossList.stream().map(profitCalculationMapper::toDto).toList();
-              }
+        log.info("Found {} profit/loss registries for shipment {}", profitLossList.size(), shipment.getReference());
 
-                  log.info("Get Profit and loss registries for shipment {}",shipment.getReference());
-
-        List<ProfitLossDto> resultList = new ArrayList<>();
-        profitLossList.forEach(profitLoss -> {
-            ProfitLossDto profitLossDto = profitCalculationMapper.toDto(profitLoss);
-            resultList.add(profitLossDto);
-        });
-
-        return resultList;
+        return profitLossList.stream().map(profitCalculationMapper::toDto).toList();
     }
     /**
      * Executes the "Calculate Profit" use case main flow: stores the income

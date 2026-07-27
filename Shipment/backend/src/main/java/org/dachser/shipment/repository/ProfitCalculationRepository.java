@@ -14,11 +14,11 @@ import java.util.UUID;
 public interface ProfitCalculationRepository extends JpaRepository<ProfitCalculation, UUID> {
 
     /**
-     * Retrieves every profit/loss calculation stored for the given shipment.
-     * <p>
+     * Retrieves every profit/loss calculation stored for the given shipment,
+     * most recently inserted first.
      *
      * @param shipment the shipment to look up calculations for
-     * @return the calculations recorded for that shipment
+     * @return the calculations recorded for that shipment, ordered by insertion date descending
      */
     List<ProfitCalculation> findAllByShipmentOrderByInsertedOnDesc(Shipment shipment);
 
