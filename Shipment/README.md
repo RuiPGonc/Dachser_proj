@@ -13,7 +13,7 @@ Shipment/
 └── frontend/   Task 2 — Angular 17 / Angular Material UI
 ```
 
-Each project has its own detailed README:
+Each task has its own detailed README:
 
 - [`backend/README.md`](backend/README.md) — architecture, database schema,
   API reference, running the app, tests, coverage, Javadoc.
