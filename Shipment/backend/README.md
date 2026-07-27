@@ -47,6 +47,14 @@ Foreign keys and indexes on all `shipment_id`/`cost_type_id` columns are include
 Seed data (3 sample shipments, `0001`–`0003`, with sample income/cost/calculation
 rows) is loaded from `src/main/resources/data.sql`.
 
+### Table relationships
+
+![Table relationships](shipment_db_relationships.svg)
+- open it with browser
+- `shipment` is the central table: `income`, `cost` and `profit_calculation` each
+  reference it via `shipment_id` (1 shipment → N rows in each).
+- `cost` also references `cost_type` via `cost_type_id` (1 cost type → N costs).
+
 ## Getting started
 
 ```bash
@@ -71,6 +79,12 @@ Single controller, exposed under `/profitLoss`:
 | GET    | `/profitLoss?shipmentReference=...` | List all profit/loss calculations for a shipment      |
 | POST   | `/profitLoss/calculation`           | Submit income/costs and calculate the profit or loss  |
 
+`POST /profitLoss/calculation` returns `201 Created` with the calculated
+`ProfitLossDto` in the body and **no `Location` header**: there is no
+single-resource endpoint for one calculation (only the list endpoint above),
+so a `Location` pointing back at that list wouldn't uniquely identify the
+resource just created.
+
 Full interactive documentation (request/response schemas, try-it-out) is
 available once the app is running:
 
@@ -80,7 +94,13 @@ available once the app is running:
 ## Testing the API manually
 
 A ready-to-import Postman collection is included at
-`Shipment-ProfitLoss.postman_collection.json` (root of this project).
+`Shipment-ProfitLoss.postman_collection.json` (root of this project), covering:
+
+- Calculate Profit/Loss (happy path — `201 Created`)
+- Calculate Profit/Loss – Invalid (all zero) (`400 Bad Request`)
+- Get Profit/Loss by Shipment Reference (`200 OK`)
+- Get Profit/Loss by Shipment Reference – Not Found (`404 Not Found`)
+- Get All Shipment References (`200 OK`)
 
 ## Running the automated tests
 
