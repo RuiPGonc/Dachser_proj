@@ -27,7 +27,14 @@
           </mat-form-field>
         </fieldset>
 
-        <button mat-raised-button type="submit" class="calculate-btn">Calculate</button>
+        <button mat-raised-button type="submit" class="calculate-btn" [disabled]="loading">
+          @if (loading) {
+            <mat-spinner diameter="18" class="btn-spinner"></mat-spinner>
+            <span>Calculating...</span>
+          } @else {
+            <span>Calculate</span>
+          }
+        </button>
 
       </fieldset>
 

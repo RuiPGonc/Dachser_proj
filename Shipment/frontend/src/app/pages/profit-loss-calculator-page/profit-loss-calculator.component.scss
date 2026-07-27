@@ -37,6 +37,15 @@
   color: #fff;
   height: 40px;
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+// Makes the spinner ring white so it's visible against the dark blue button
+.btn-spinner ::ng-deep circle {
+  stroke: #fff;
 }
 
 input[type='number'] {

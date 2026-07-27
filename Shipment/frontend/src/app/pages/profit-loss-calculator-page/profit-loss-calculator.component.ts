@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProfitLoss, CalculationRequest} from "../../models/calculation.model";
 import {ErrorResponse} from "../../models/error.model";
@@ -28,12 +29,13 @@ import {ActivatedRoute} from '@angular/router';
     MatButtonModule,
     ProfitLossResultsComponent,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './profit-loss-calculator.component.html',
   styleUrl: './profit-loss-calculator.component.scss',
 })
 
-export class ProfitLossCalculatorComponent {
+export class ProfitLossCalculatorComponent implements OnInit{
   private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
   private readonly service = inject(ShipmentService);
@@ -66,6 +68,9 @@ export class ProfitLossCalculatorComponent {
    * On failure (or invalid form), shows an error message via the snackbar.
    */
   onCalculate(): void {
+
+    if(this.loading) return;
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       this.snackBar.open(
@@ -78,7 +83,7 @@ export class ProfitLossCalculatorComponent {
 
     const v = this.form.getRawValue();
     const request: CalculationRequest = {
-      shipmentReference: this.shipmentReference!,
+      shipmentReference: this.shipmentReference,
       incomeValue: Number(v.incomeValue),
       costs: {
         costValue: Number(v.costValue),

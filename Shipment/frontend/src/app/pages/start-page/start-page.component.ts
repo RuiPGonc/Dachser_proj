@@ -32,7 +32,7 @@ export class StartPageComponent implements OnInit{
   ngOnInit(): void {
     this.service.getAllShipmentReferences().subscribe({
       next: (list) => (this.shipmentReferences = list),
-      error: (err) => console.error('Erro ao carregar shipments', err),
+      error: (err) => console.error('Error uploading shipments', err),
     });
   }
 
