@@ -96,6 +96,7 @@ public class ShipmentService {
             if (costs.getAdditionalCostValue().compareTo(BigDecimal.ZERO) != 0) {
                 Cost cost = new Cost();
                 cost.setValue(costs.getAdditionalCostValue());
+                //cost.setCostType(costTypeRepository.findCostTypeByCode("ADDITIONAL").orElseThrow(() -> new CostTypeNotFoundException("ADDITIONAL")));
                 cost.setCostType(costTypeRepository.findCostTypeById(2).orElseThrow(() -> new CostTypeNotFoundException("2")));
                 cost.setInsertedOn(LocalDateTime.now());
                 cost.setShipment(shipment);

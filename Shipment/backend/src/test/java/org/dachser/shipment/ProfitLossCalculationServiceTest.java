@@ -5,6 +5,7 @@ import org.dachser.shipment.dto.ProfitLossDto;
 import org.dachser.shipment.dto.ShipmentDto;
 import org.dachser.shipment.entities.ProfitCalculation;
 import org.dachser.shipment.entities.Shipment;
+import org.dachser.shipment.exception.InvalidDataException;
 import org.dachser.shipment.mapper.ProfitCalculationMapper;
 import org.dachser.shipment.repository.ProfitCalculationRepository;
 import org.dachser.shipment.repository.ShipmentRepository;
@@ -80,6 +81,8 @@ class ProfitLossCalculationServiceTest {
                 .totalIncome(new BigDecimal(1000))
                 .totalCost(new BigDecimal(300))
                 .build();
+
+
     }
 
     @Test

@@ -1,6 +1,5 @@
 package org.dachser.shipment.exception;
 
-import java.util.UUID;
 
 /**
  * Thrown when no {@link org.dachser.shipment.entities.Shipment} matches the
